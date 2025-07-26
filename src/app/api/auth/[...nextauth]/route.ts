@@ -94,6 +94,8 @@ const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile }) {
+      console.log('SignIn callback:', { provider: account?.provider, email: user.email });
+      
       // Handle social login user creation
       if (account?.provider !== 'credentials' && user.email) {
         try {
@@ -101,6 +103,7 @@ const authOptions: NextAuthOptions = {
           const existingUser = getUserByEmail(user.email);
           
           if (!existingUser) {
+            console.log('Creating new social user:', user.email);
             // Create new user for social login
             await createUser({
               email: user.email,
@@ -115,6 +118,22 @@ const authOptions: NextAuthOptions = {
         }
       }
       return true;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log('Redirect callback:', { url, baseUrl });
+      
+      // If the URL is relative, make it absolute
+      if (url.startsWith('/')) {
+        return `${baseUrl}${url}`;
+      }
+      
+      // If the URL is for the same origin, allow it
+      if (new URL(url).origin === baseUrl) {
+        return url;
+      }
+      
+      // Default redirect to events page after successful auth
+      return `${baseUrl}/events`;
     },
     async jwt({ token, user, account }) {
       if (user) {

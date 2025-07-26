@@ -9,6 +9,19 @@ interface SocialAuthProps {
 }
 
 const SocialAuth = ({ className }: SocialAuthProps) => {
+  const handleGoogleSignIn = async () => {
+    try {
+      console.log('Initiating Google sign-in...');
+      const result = await signIn('google', { 
+        callbackUrl: `${window.location.origin}/events`,
+        redirect: true 
+      });
+      console.log('Google sign-in result:', result);
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+    }
+  };
+
   return (
     <div className={className}>
       {/* Divider */}
@@ -28,7 +41,7 @@ const SocialAuth = ({ className }: SocialAuthProps) => {
         <Button 
           variant="transparent" 
           className="w-full py-3 border border-gray-300 hover:bg-gray-50 transition-colors"
-          onClick={() => signIn('google', { callbackUrl: '/events' })}
+          onClick={handleGoogleSignIn}
         >
           <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
             <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
