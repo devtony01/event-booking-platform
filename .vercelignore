@@ -1,0 +1,16 @@
+# Vercel ignore file
+src/design/*/node_modules
+src/design/*/dist
+src/design/*/.next
+src/design/*/coverage
+src/design/*/storybook-static
+*.log
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+coverage/
+.nyc_output/
+test-results.json
+public/test-results.html
