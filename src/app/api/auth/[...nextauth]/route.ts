@@ -91,6 +91,7 @@ if (isGitHubConfigured) {
 
 const authOptions: NextAuthOptions = {
   providers,
+  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-development',
   session: {
     strategy: 'jwt',
   },
@@ -112,6 +113,7 @@ const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/account',
   },
+  debug: process.env.NODE_ENV === 'development',
 };
 
 const handler = NextAuth(authOptions);

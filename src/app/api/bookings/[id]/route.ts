@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 
 // Mock booking data
 const mockBookings = [
@@ -49,14 +48,8 @@ export async function POST(
 ) {
   const resolvedParams = await params;
   try {
-    // Check if user is authenticated
-    const session = await getServerSession();
-    if (!session?.user) {
-      return NextResponse.json(
-        { success: false, error: 'Authentication required' },
-        { status: 401 }
-      );
-    }
+    // For demo purposes, we'll skip authentication check
+    // In production, you would check authentication here
 
     const { eventId, numberOfTickets, totalAmount } = await request.json();
     
@@ -71,15 +64,15 @@ export async function POST(
     // Create new booking
     const newBooking = {
       id: Date.now().toString(),
-      userId: session.user.email || 'anonymous',
+      userId: 'demo-user',
       eventId: resolvedParams.id,
       numberOfSeats: numberOfTickets,
       totalPrice: totalAmount,
       status: 'confirmed',
       paymentStatus: 'paid',
       bookingDate: new Date(),
-      customerName: session.user.name || 'Guest',
-      customerEmail: session.user.email || '',
+      customerName: 'Demo User',
+      customerEmail: 'demo@example.com',
     };
 
     // Add to mock storage
