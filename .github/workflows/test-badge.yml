@@ -13,12 +13,16 @@ on:
 jobs:
   test-and-badge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
         
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -47,11 +51,11 @@ jobs:
     - name: Commit and push changes
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
         git add README.md test-results.json public/test-results.html
         git commit -m "🧪 Update test badge and results [skip ci]" || exit 0
-        git push
+        git push origin HEAD:main
         
     - name: Upload test results
       uses: actions/upload-artifact@v4
