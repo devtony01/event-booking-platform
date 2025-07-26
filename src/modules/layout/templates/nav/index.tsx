@@ -110,14 +110,14 @@ const Nav = () => {
             <div className="w-px h-6 bg-gray-300" />
             
             <Button variant="transparent" size="small" asChild>
-              <Link href="/account/login" className="flex items-center">
+              <Link href="/account" className="flex items-center">
                 <User className="h-4 w-4 mr-2" />
                 Sign In
               </Link>
             </Button>
             
             <Button size="small" asChild>
-              <Link href="/account/register">
+              <Link href="/account">
                 Get Started
               </Link>
             </Button>
@@ -176,13 +176,13 @@ const Nav = () => {
               {/* Mobile Auth Section */}
               <div className="pt-4 pb-3 border-t border-gray-200 space-y-2">
                 <Button variant="transparent" className="w-full justify-start" asChild>
-                  <Link href="/account/login" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/account" onClick={() => setIsMenuOpen(false)}>
                     <User className="h-4 w-4 mr-2" />
                     Sign In
                   </Link>
                 </Button>
                 <Button className="w-full" asChild>
-                  <Link href="/account/register" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/account" onClick={() => setIsMenuOpen(false)}>
                     Get Started
                   </Link>
                 </Button>

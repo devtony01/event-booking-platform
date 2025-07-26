@@ -233,7 +233,7 @@ const Login = ({ setCurrentView }: Props) => {
                   Sign up for free
                 </button>
               ) : (
-                <Link href="/account/register" className="text-blue-600 hover:text-blue-700 font-medium">
+                <Link href="/account" className="text-blue-600 hover:text-blue-700 font-medium">
                   Sign up for free
                 </Link>
               )}

@@ -76,7 +76,7 @@ const Register = ({ setCurrentView }: Props) => {
       }
 
       toast.success('Account created successfully!')
-      router.push('/account/login')
+router.push('/account')
     } catch (error) {
       setApiError('An error occurred. Please try again.')
       console.error('Registration error:', error)
@@ -341,7 +341,7 @@ const Register = ({ setCurrentView }: Props) => {
                   Sign in
                 </button>
               ) : (
-                <Link href="/account/login" className="text-blue-600 hover:text-blue-700 font-medium">
+                <Link href="/account" className="text-blue-600 hover:text-blue-700 font-medium">
                   Sign in
                 </Link>
               )}
