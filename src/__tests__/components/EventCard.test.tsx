@@ -36,7 +36,7 @@ describe('EventCard', () => {
     expect(screen.getByText('This is a test event description')).toBeInTheDocument()
     expect(screen.getByText('Technology')).toBeInTheDocument()
     expect(screen.getByText(/Test City/)).toBeInTheDocument()
-    expect(screen.getByText('$50.00')).toBeInTheDocument()
+    expect(screen.getAllByText('$50.00')).toHaveLength(2) // Price appears twice
   })
 
   it('displays available seats correctly', () => {
@@ -59,7 +59,7 @@ describe('EventCard', () => {
     
     render(<EventCard event={soldOutEvent} />)
     
-    expect(screen.getByText('Sold Out')).toBeInTheDocument()
+    expect(screen.getAllByText('Sold Out')).toHaveLength(2) // Status and button
   })
 
   it('shows "Past Event" status for past events', () => {
@@ -70,7 +70,7 @@ describe('EventCard', () => {
     
     render(<EventCard event={pastEvent} />)
     
-    expect(screen.getByText('Past Event')).toBeInTheDocument()
+    expect(screen.getAllByText('Past Event')).toHaveLength(2) // Status and button
   })
 
   it('displays "Free" for events with zero price', () => {
@@ -102,7 +102,7 @@ describe('EventCard', () => {
     
     render(<EventCard event={soldOutEvent} />)
     
-    const button = screen.getByText('Sold Out')
+    const button = screen.getByRole('button', { name: /sold out/i })
     expect(button).toBeDisabled()
   })
 
@@ -114,7 +114,7 @@ describe('EventCard', () => {
     
     render(<EventCard event={pastEvent} />)
     
-    const button = screen.getByText('Past Event')
+    const button = screen.getByRole('button', { name: /past event/i })
     expect(button).toBeDisabled()
   })
 

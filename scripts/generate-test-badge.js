@@ -32,7 +32,7 @@ class TestBadgeGenerator {
 
   async runTests() {
     return new Promise((resolve) => {
-      const jest = spawn('npm', ['test', '--', '--json', '--passWithNoTests'], {
+      const jest = spawn('yarn', ['test', '--json', '--passWithNoTests'], {
         cwd: process.cwd(),
         stdio: ['pipe', 'pipe', 'pipe']
       });
@@ -128,16 +128,16 @@ class TestBadgeGenerator {
 
 \`\`\`bash
 # Run all tests
-npm test
+yarn test
 
 # Run tests in watch mode
-npm run test:watch
+yarn test:watch
 
 # Run tests with coverage
-npm run test:coverage
+yarn test:coverage
 
 # Run specific test file
-npm test -- EventCard.test.tsx
+yarn test EventCard.test.tsx
 \`\`\`
 
 ### 🔧 Test Configuration

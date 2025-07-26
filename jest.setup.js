@@ -30,8 +30,26 @@ jest.mock('next-auth/react', () => ({
   },
   signIn: jest.fn(),
   signOut: jest.fn(),
+  getProviders: jest.fn(() => Promise.resolve({
+    google: {
+      id: 'google',
+      name: 'Google',
+      type: 'oauth',
+      signinUrl: '/api/auth/signin/google',
+      callbackUrl: '/api/auth/callback/google'
+    }
+  })),
   SessionProvider: ({ children }) => children,
 }))
+
+// Mock Next.js Image component
+jest.mock('next/image', () => {
+  return function MockImage({ src, alt, fill, sizes, priority, placeholder, blurDataURL, ...props }) {
+    // Don't pass Next.js specific props to the img element
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt={alt} {...props} />
+  }
+})
 
 // Mock environment variables
 process.env.NEXTAUTH_SECRET = 'test-secret'

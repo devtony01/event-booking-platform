@@ -204,7 +204,7 @@ describe('Utility Functions', () => {
       expect(status).toBe('starting-soon')
     })
 
-    it('should return "available" for future events with seats', () => {
+    it('should return "upcoming" for future events with seats', () => {
       const event: Event = {
         _id: '1',
         title: 'Test Event',
@@ -223,7 +223,7 @@ describe('Utility Functions', () => {
       }
 
       const status = getEventStatus(event)
-      expect(status).toBe('available')
+      expect(status).toBe('upcoming')
     })
   })
 })

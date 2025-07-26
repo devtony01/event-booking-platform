@@ -24,18 +24,18 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: next/package-lock.json
+        cache: 'yarn'
+        cache-dependency-path: next/yarn.lock
         
     - name: Install dependencies
       run: |
         cd next
-        npm ci --legacy-peer-deps
+        yarn install --frozen-lockfile
         
     - name: Run tests and generate badge
       run: |
         cd next
-        npm run test:badge
+        yarn test:badge
         
     - name: Check for changes
       id: verify-changed-files

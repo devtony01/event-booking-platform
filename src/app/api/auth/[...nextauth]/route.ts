@@ -69,12 +69,27 @@ const providers: any[] = [
 
 // Only add social providers if properly configured
 if (isGoogleConfigured) {
+  console.log('Adding Google provider to NextAuth');
   providers.push(
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: 'openid email profile',
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code'
+        }
+      }
     })
   );
+} else {
+  console.log('Google OAuth not configured:', {
+    hasClientId: !!process.env.GOOGLE_CLIENT_ID,
+    hasClientSecret: !!process.env.GOOGLE_CLIENT_SECRET,
+    clientIdValue: process.env.GOOGLE_CLIENT_ID?.substring(0, 10) + '...',
+  });
 }
 
 if (isGitHubConfigured) {
