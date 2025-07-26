@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { Calendar, MapPin, Users, DollarSign } from 'lucide-react'
 import type { EventCardProps } from '@modules/events/types'
 import { formatDate, formatTime, formatCurrency, getAvailableSeats, getEventStatus } from '@lib/utils'
@@ -9,6 +10,7 @@ import { Text } from '@design/ui/src/components/text'
 import { cn } from '@lib/utils'
 
 const EventCard = ({ event, onClick, className }: EventCardProps) => {
+  const router = useRouter()
   const availableSeats = getAvailableSeats(event)
   const status = getEventStatus(event)
   
@@ -100,7 +102,7 @@ const EventCard = ({ event, onClick, className }: EventCardProps) => {
           <Button 
             size="small"
             disabled={status === 'sold-out' || status === 'past'}
-            onClick={onClick || (() => window.location.href = `/events/${event._id}`)}
+            onClick={onClick || (() => router.push(`/events/${event._id}`))}
           >
             {status === 'sold-out' ? 'Sold Out' : status === 'past' ? 'Past Event' : 'View Details'}
           </Button>

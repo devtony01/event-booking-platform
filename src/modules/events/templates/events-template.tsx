@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Event, EventFilters } from '@modules/events/types';
 import EventsList from '../components/events-list';
 import EventFiltersComponent from '../components/event-filters';
@@ -11,6 +12,7 @@ interface EventsTemplateProps {
 }
 
 export default function EventsTemplate({ initialEvents }: EventsTemplateProps) {
+  const router = useRouter();
   const [events, setEvents] = useState<Event[]>(initialEvents);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -68,8 +70,8 @@ export default function EventsTemplate({ initialEvents }: EventsTemplateProps) {
   };
 
   const handleEventClick = (eventId: string) => {
-    // Navigate to event details page
-    window.location.href = `/events/${eventId}`;
+    // Navigate to event details page using Next.js router
+    router.push(`/events/${eventId}`);
   };
 
   return (
