@@ -1,0 +1,108 @@
+name: Update Test Badge
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    # Run daily at 9 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+  test-and-badge:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: next/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd next
+        npm ci --legacy-peer-deps
+        
+    - name: Run tests and generate badge
+      run: |
+        cd next
+        npm run test:badge
+        
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        cd next
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit and push changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        cd next
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md test-results.json public/test-results.html
+        git commit -m "🧪 Update test badge and results [skip ci]" || exit 0
+        git push
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: |
+          next/test-results.json
+          next/public/test-results.html
+          next/coverage/
+        retention-days: 30
+        
+    - name: Comment PR with test results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          try {
+            const resultsPath = path.join('next', 'test-results.json');
+            const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+            
+            const passRate = results.passRate;
+            const statusIcon = passRate >= 80 ? '✅' : passRate >= 60 ? '⚠️' : '❌';
+            
+            const comment = `## ${statusIcon} Test Results
+            
+            | Metric | Value |
+            |--------|-------|
+            | **Total Tests** | ${results.total} |
+            | **Passing** | ${results.passing} ✅ |
+            | **Failing** | ${results.failing} ❌ |
+            | **Pass Rate** | ${results.passRate}% |
+            
+            ${passRate >= 80 ? '🎉 Great job! All tests are passing.' : 
+              passRate >= 60 ? '⚠️ Some tests are failing. Please review.' : 
+              '❌ Multiple test failures detected. Please fix before merging.'}
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          } catch (error) {
+            console.log('Could not read test results:', error.message);
+          }

@@ -15,7 +15,11 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci --coverage --watchAll=false"
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "test:badge": "node scripts/generate-test-badge.js",
+    "test:update-readme": "npm run test:badge",
+    "test:watch-and-update": "node scripts/watch-tests.js watch",
+    "test:dashboard": "echo 'Test dashboard available at http://localhost:3001/test-dashboard'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.0",
