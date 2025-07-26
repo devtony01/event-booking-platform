@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Calendar, MapPin, Users, DollarSign, Clock, Tag } from 'lucide-react';
-import { Event as EventType } from '@lib/types/database';
+import { Event } from '@modules/events/types';
+import { getEventById, getAllEvents } from '@lib/data/events';
 import { formatDate, formatTime, formatCurrency, getAvailableSeats, getEventStatus } from '@lib/utils';
 import { Button } from '@design/ui/src/components/button';
 import { Text } from '@design/ui/src/components/text';
@@ -12,51 +13,15 @@ interface EventPageProps {
   params: Promise<{ id: string }>;
 }
 
-// Mock events data (same as API)
-const mockEvents: EventType[] = [
-  {
-    _id: '1',
-    title: 'Tech Conference 2024',
-    description: 'Annual technology conference featuring the latest trends in AI, blockchain, and web development. Join industry leaders, developers, and innovators for three days of cutting-edge presentations, workshops, and networking opportunities. This year\'s keynote speakers include top executives from major tech companies and renowned researchers from leading universities.',
-    category: 'Technology',
-    address: '123 Tech Street, Convention Center',
-    city: 'San Francisco',
-    date: new Date('2024-03-15T09:00:00Z'),
-    availableSeats: 500,
-    bookedSeats: 120,
-    price: 299,
-    organizer: 'org-1',
-    imageUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800',
-    reviews: [],
-    createdAt: new Date('2024-01-01T00:00:00Z'),
-  },
-  {
-    _id: '2',
-    title: 'Summer Music Festival',
-    description: 'Three days of amazing music with top artists from around the world. Experience multiple stages, food vendors, and an unforgettable atmosphere in the heart of Central Park.',
-    category: 'Music',
-    address: 'Central Park, Great Lawn',
-    city: 'New York',
-    date: new Date('2024-06-20T18:00:00Z'),
-    availableSeats: 10000,
-    bookedSeats: 3500,
-    price: 150,
-    organizer: 'org-2',
-    imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800',
-    reviews: [],
-    createdAt: new Date('2024-01-15T00:00:00Z'),
-  },
-];
-
-async function getEvent(id: string): Promise<EventType | null> {
-  // In production, this would be an API call or database query
-  const event = mockEvents.find(e => e._id === id);
-  return event || null;
+// Get event by ID
+async function getEvent(id: string): Promise<Event | null> {
+  return getEventById(id) || null;
 }
 
 // Generate static params for SSG
 export async function generateStaticParams() {
-  return mockEvents.map((event) => ({
+  const events = getAllEvents();
+  return events.map((event) => ({
     id: event._id,
   }));
 }

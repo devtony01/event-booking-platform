@@ -3,25 +3,7 @@ import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
-import bcrypt from 'bcryptjs';
-
-// Mock users for demonstration (shared with register route)
-const mockUsers = [
-  {
-    id: '1',
-    email: 'user@example.com',
-    password: '$2b$12$m8axFJ9dZikfBcTE32LV/.WcBJfEQdrFhp.wvo967vvtDvMbzh38K', // password123
-    name: 'John Doe',
-    role: 'user',
-  },
-  {
-    id: '2',
-    email: 'organizer@example.com',
-    password: '$2b$12$m8axFJ9dZikfBcTE32LV/.WcBJfEQdrFhp.wvo967vvtDvMbzh38K', // password123
-    name: 'Jane Smith',
-    role: 'organizer',
-  },
-];
+import { getUserByEmail, validatePassword, createUser } from '@lib/data/users';
 
 // Check if social auth is properly configured
 const isGoogleConfigured = process.env.GOOGLE_CLIENT_ID && 
@@ -49,33 +31,38 @@ const providers: any[] = [
         return null;
       }
 
-      // Find user in mock data
-      const user = mockUsers.find(u => u.email === credentials.email);
-      
-      if (!user) {
-        console.log('User not found:', credentials.email);
+      try {
+        // Find user in central data store
+        const user = getUserByEmail(credentials.email);
+        
+        if (!user) {
+          console.log('User not found:', credentials.email);
+          return null;
+        }
+
+        console.log('User found, checking password...');
+        
+        // Validate password
+        const isPasswordValid = await validatePassword(credentials.password, user.password);
+        
+        console.log('Password valid:', isPasswordValid);
+        
+        if (!isPasswordValid) {
+          return null;
+        }
+
+        console.log('Authentication successful for:', user.email);
+        
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        };
+      } catch (error) {
+        console.error('Authentication error:', error);
         return null;
       }
-
-      console.log('User found, checking password...');
-      
-      // Check password
-      const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
-      
-      console.log('Password valid:', isPasswordValid);
-      
-      if (!isPasswordValid) {
-        return null;
-      }
-
-      console.log('Authentication successful for:', user.email);
-      
-      return {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      };
     },
   }),
 ];
@@ -106,9 +93,39 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async signIn({ user, account, profile }) {
+      // Handle social login user creation
+      if (account?.provider !== 'credentials' && user.email) {
+        try {
+          // Check if user exists in our system
+          const existingUser = getUserByEmail(user.email);
+          
+          if (!existingUser) {
+            // Create new user for social login
+            await createUser({
+              email: user.email,
+              name: user.name || 'Social User',
+              password: 'social-login', // Placeholder for social users
+              role: 'user',
+            });
+          }
+        } catch (error) {
+          console.error('Error creating social user:', error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account }) {
       if (user) {
-        token.role = (user as any).role || 'user';
+        // For credentials login, get role from user object
+        if (account?.provider === 'credentials') {
+          token.role = (user as any).role || 'user';
+        } else {
+          // For social login, get role from database
+          const dbUser = getUserByEmail(user.email!);
+          token.role = dbUser?.role || 'user';
+        }
       }
       return token;
     },
