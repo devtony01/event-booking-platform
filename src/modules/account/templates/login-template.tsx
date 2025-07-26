@@ -11,7 +11,7 @@ export enum LOGIN_VIEW {
 }
 
 const LoginTemplate = () => {
-  const [currentView, setCurrentView] = useState("sign-in")
+  const [currentView, setCurrentView] = useState<LOGIN_VIEW>(LOGIN_VIEW.SIGN_IN)
 
   return (
       <>
@@ -23,7 +23,7 @@ const LoginTemplate = () => {
         <div className="flex overflow-hidden flex-col w-fit shrink self-stretch my-auto bg-white min-w-[240px] max-md:max-w-full">
 
           <div className="flex flex-col w-full max-md:max-w-full">
-            {currentView === "sign-in" ? (
+            {currentView === LOGIN_VIEW.SIGN_IN ? (
               <Login setCurrentView={setCurrentView} />
             ) : (
               <Register setCurrentView={setCurrentView} />
