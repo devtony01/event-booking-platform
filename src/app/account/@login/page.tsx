@@ -1,12 +1,7 @@
 import { Metadata } from "next"
 
-import LoginTemplate from "@modules/account/templates/login-template"
+import Login from "@modules/account/components/login"
 
-export const metadata: Metadata = {
-  title: "Sign in",
-  description: "",
-}
-
-export default function Login() {
-  return <LoginTemplate />
+export default function LoginPage() {
+  return <Login />
 }
