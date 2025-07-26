@@ -56,9 +56,11 @@ const Login = ({ setCurrentView }: Props) => {
         return
       }
 
-      toast.success('Successfully logged in!')
-      router.push('/events')
-      router.refresh()
+      if (result?.ok) {
+        toast.success('Successfully logged in!')
+        // Force a hard redirect to ensure session is properly loaded
+        window.location.href = '/events'
+      }
     } catch (error) {
       setApiError('An error occurred. Please try again.')
       console.error('Login error:', error)

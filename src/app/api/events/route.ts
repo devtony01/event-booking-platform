@@ -1,16 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Event } from '@lib/types/database';
 
+// Generate future dates for events
+const now = new Date();
+const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+const nextMonth = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+const twoMonths = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000);
+const threeMonths = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+const fourMonths = new Date(now.getTime() + 120 * 24 * 60 * 60 * 1000);
+const fiveMonths = new Date(now.getTime() + 150 * 24 * 60 * 60 * 1000);
+const sixMonths = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000);
+const sevenMonths = new Date(now.getTime() + 210 * 24 * 60 * 60 * 1000);
+
 // Mock events data for demonstration
 const mockEvents: Event[] = [
 {
     _id: '1',
-    title: 'Tech Conference 2024',
+    title: 'Tech Conference 2025',
     description: 'Annual technology conference featuring the latest trends in AI, blockchain, and web development.',
     category: 'Tech',
     address: '123 Tech St, Springfield',
     city: 'Springfield',
-    date: new Date('2024-03-15T09:00:00Z'),
+    date: nextMonth,
     availableSeats: 500,
     bookedSeats: 120,
     price: 299,
@@ -26,7 +37,7 @@ const mockEvents: Event[] = [
     category: 'Music',
     address: 'Central Park, Metropolis',
     city: 'Metropolis',
-    date: new Date('2024-06-20T18:00:00Z'),
+    date: threeMonths,
     availableSeats: 1500,
     bookedSeats: 300,
     price: 75,
@@ -37,12 +48,12 @@ const mockEvents: Event[] = [
   },
   {
     _id: '3',
-    title: 'Art Expo 2024',
+    title: 'Art Expo 2025',
     description: 'A collection of breathtaking artworks from local artists.',
     category: 'Art',
     address: 'Gallery Ave, Gotham',
     city: 'Gotham',
-    date: new Date('2024-02-28T19:00:00Z'),
+    date: nextWeek,
     availableSeats: 200,
     bookedSeats: 75,
     price: 40,
@@ -58,7 +69,7 @@ const mockEvents: Event[] = [
     category: 'Food',
     address: 'Culinary Blvd, Star City',
     city: 'Star City',
-    date: new Date('2024-05-10T16:00:00Z'),
+    date: twoMonths,
     availableSeats: 500,
     bookedSeats: 180,
     price: 20,
@@ -69,12 +80,12 @@ const mockEvents: Event[] = [
   },
   {
     _id: '5',
-    title: 'City Marathon 2024',
+    title: 'City Marathon 2025',
     description: 'Run alongside athletes and enthusiasts in this city-wide marathon event.',
     category: 'Sports',
     address: 'City Center, Central City',
     city: 'Central City',
-    date: new Date('2024-04-15T06:00:00Z'),
+    date: fourMonths,
     availableSeats: 500,
     bookedSeats: 200,
     price: 25,
@@ -90,7 +101,7 @@ const mockEvents: Event[] = [
     category: 'Conference',
     address: 'Convention Center, Capital City',
     city: 'Capital City',
-    date: new Date('2024-07-20T09:00:00Z'),
+    date: fiveMonths,
     availableSeats: 300,
     bookedSeats: 45,
     price: 150,
@@ -106,7 +117,7 @@ const mockEvents: Event[] = [
     category: 'Entertainment',
     address: 'Comedy Club, Downtown',
     city: 'Downtown',
-    date: new Date('2024-08-15T20:00:00Z'),
+    date: sixMonths,
     availableSeats: 150,
     bookedSeats: 90,
     price: 35,
@@ -122,7 +133,7 @@ const mockEvents: Event[] = [
     category: 'Workshop',
     address: 'Studio Space, Creative District',
     city: 'Creative District',
-    date: new Date('2024-09-05T10:00:00Z'),
+    date: sevenMonths,
     availableSeats: 25,
     bookedSeats: 12,
     price: 80,

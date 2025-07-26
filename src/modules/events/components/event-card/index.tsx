@@ -27,11 +27,24 @@ const EventCard = ({ event, onClick, className }: EventCardProps) => {
     }
   }
 
+  const handleCardClick = () => {
+    if (status === 'sold-out' || status === 'past') return;
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(`/events/${event._id}`);
+    }
+  };
+
   return (
-    <div className={cn(
-      "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300",
-      className
-    )}>
+    <div 
+      className={cn(
+        "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer",
+        status === 'sold-out' || status === 'past' ? 'cursor-not-allowed opacity-75' : '',
+        className
+      )}
+      onClick={handleCardClick}
+    >
       <div className="relative h-48">
         <Image
           src={event.imageUrl || '/placeholder-event.jpg'}
@@ -102,7 +115,10 @@ const EventCard = ({ event, onClick, className }: EventCardProps) => {
           <Button 
             size="small"
             disabled={status === 'sold-out' || status === 'past'}
-            onClick={onClick || (() => router.push(`/events/${event._id}`))}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent card click
+              handleCardClick();
+            }}
           >
             {status === 'sold-out' ? 'Sold Out' : status === 'past' ? 'Past Event' : 'View Details'}
           </Button>

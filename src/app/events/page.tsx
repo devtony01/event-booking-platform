@@ -12,15 +12,23 @@ async function getEvents(): Promise<Event[]> {
   try {
     // In production, this would be an actual API call
     // For now, we'll return the same mock data as the API
+    // Get current date and create future dates
+    const now = new Date();
+    const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const nextMonth = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+    const twoMonths = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000);
+    const threeMonths = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+    const fourMonths = new Date(now.getTime() + 120 * 24 * 60 * 60 * 1000);
+
     const mockEvents: Event[] = [
       {
         _id: '1',
-        title: 'Tech Conference 2024',
+        title: 'Tech Conference 2025',
         description: 'Annual technology conference featuring the latest trends in AI, blockchain, and web development.',
         category: 'Technology',
         address: '123 Tech Street',
         city: 'San Francisco',
-        date: new Date('2024-03-15T09:00:00Z'),
+        date: nextMonth,
         availableSeats: 500,
         bookedSeats: 120,
         price: 299,
@@ -36,7 +44,7 @@ async function getEvents(): Promise<Event[]> {
         category: 'Music',
         address: 'Central Park',
         city: 'New York',
-        date: new Date('2024-06-20T18:00:00Z'),
+        date: threeMonths,
         availableSeats: 10000,
         bookedSeats: 3500,
         price: 150,
@@ -52,7 +60,7 @@ async function getEvents(): Promise<Event[]> {
         category: 'Art',
         address: '456 Gallery Ave',
         city: 'Los Angeles',
-        date: new Date('2024-02-28T19:00:00Z'),
+        date: nextWeek,
         availableSeats: 100,
         bookedSeats: 45,
         price: 0,
@@ -68,7 +76,7 @@ async function getEvents(): Promise<Event[]> {
         category: 'Food',
         address: '789 Culinary Blvd',
         city: 'Chicago',
-        date: new Date('2024-05-10T16:00:00Z'),
+        date: twoMonths,
         availableSeats: 300,
         bookedSeats: 85,
         price: 75,
@@ -84,7 +92,7 @@ async function getEvents(): Promise<Event[]> {
         category: 'Sports',
         address: 'City Center',
         city: 'Boston',
-        date: new Date('2024-04-15T06:00:00Z'),
+        date: fourMonths,
         availableSeats: 2000,
         bookedSeats: 1200,
         price: 50,
