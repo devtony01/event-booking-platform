@@ -223,21 +223,60 @@ npm start
 
 ## 🔒 Authentication Flow
 
-### Demo Credentials
-For testing the credentials provider:
+### Demo User Accounts
+The application comes with pre-configured demo accounts for testing:
+
+#### **Regular User Account**
 - **Email**: `user@example.com`
 - **Password**: `password123`
+- **Role**: `user`
+- **Name**: John Doe
+- **Access**: Can browse events, book tickets, view dashboard
 
-### Registration Process
-1. User fills registration form with validation
-2. Password strength requirements enforced
-3. Account creation with form validation
-4. Automatic redirect to dashboard
+#### **Event Organizer Account**
+- **Email**: `organizer@example.com`
+- **Password**: `password123`
+- **Role**: `organizer`
+- **Name**: Jane Smith
+- **Access**: Can create/manage events, view analytics
+
+### Custom User Registration
+Users can create their own accounts with:
+
+#### **Registration Requirements**
+- **Email**: Valid email format (validated)
+- **Password**: Minimum 6 characters
+- **Name**: Full name required
+- **Role**: Automatically assigned as `user`
+
+#### **Registration Process**
+1. User fills registration form with real-time validation
+2. Email format and password strength checked
+3. Duplicate email prevention
+4. Secure password hashing with bcrypt
+5. Automatic login after successful registration
+6. Redirect to events page
+
+#### **Account Features**
+- **Secure Authentication**: bcrypt password hashing
+- **Session Management**: JWT-based sessions with NextAuth.js
+- **Profile Management**: Update name, email, preferences
+- **Booking History**: View all past and upcoming bookings
+- **Account Security**: Password change functionality
 
 ### Social Authentication
-- Google OAuth integration ready
-- GitHub OAuth integration ready
-- Extensible for additional providers
+- **Google OAuth**: Sign in with Google account
+- **GitHub OAuth**: Sign in with GitHub account (configurable)
+- **Auto Account Creation**: Social users automatically get accounts
+- **Profile Sync**: Name and email from social providers
+- **Seamless Integration**: Same features as custom accounts
+
+### Authentication Security
+- **Password Hashing**: bcrypt with salt rounds (12)
+- **Session Security**: Secure JWT tokens
+- **CSRF Protection**: Built-in NextAuth.js protection
+- **Environment Variables**: Secure credential storage
+- **Production Ready**: OAuth callback URLs configured
 
 ## 📊 Mock Data
 
@@ -314,6 +353,104 @@ export async function GET(request: NextRequest) {
 }
 ```
 
+## 🧪 Testing
+
+### Test Suite Overview
+Comprehensive unit tests covering core functionality:
+
+#### **Test Coverage Areas**
+- **Data Layer**: Event and user data store functions
+- **Utility Functions**: Date formatting, currency, event status
+- **React Components**: Event cards, social authentication
+- **API Routes**: Event CRUD operations, validation
+- **Authentication**: User creation, password validation
+
+#### **Testing Technologies**
+- **Jest**: Test runner and assertion library
+- **React Testing Library**: Component testing utilities
+- **Jest DOM**: Custom Jest matchers for DOM testing
+- **User Event**: Simulating user interactions
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode (development)
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests for CI/CD
+npm run test:ci
+```
+
+### Test Structure
+
+```
+src/__tests__/
+├── components/           # Component tests
+│   ├── EventCard.test.tsx
+│   └── SocialAuth.test.tsx
+├── lib/                  # Utility and data tests
+│   ├── events.test.ts
+│   ├── users.test.ts
+│   └── utils.test.ts
+└── api/                  # API route tests
+    └── events.test.ts
+```
+
+### Test Examples
+
+#### **Component Testing**
+```typescript
+// Testing event card rendering and interactions
+it('renders event information correctly', () => {
+  render(<EventCard event={mockEvent} />)
+  
+  expect(screen.getByText('Test Event')).toBeInTheDocument()
+  expect(screen.getByText('$50.00')).toBeInTheDocument()
+})
+```
+
+#### **Data Store Testing**
+```typescript
+// Testing event filtering functionality
+it('should return events filtered by category', () => {
+  const events = getEventsByCategory('Technology')
+  
+  events.forEach(event => {
+    expect(event.category.toLowerCase()).toBe('technology')
+  })
+})
+```
+
+#### **API Testing**
+```typescript
+// Testing API route responses
+it('should return all events when no filters provided', async () => {
+  const response = await GET(request)
+  const data = await response.json()
+
+  expect(response.status).toBe(200)
+  expect(data.success).toBe(true)
+})
+```
+
+### Coverage Goals
+- **Branches**: 70%+
+- **Functions**: 70%+
+- **Lines**: 70%+
+- **Statements**: 70%+
+
+### Mocking Strategy
+- **Next.js Router**: Mocked for navigation testing
+- **NextAuth**: Mocked for authentication testing
+- **Next Image**: Mocked for component testing
+- **API Calls**: Mocked for isolated unit testing
+
 ## 🚀 Deployment
 
 ### Vercel Configuration
@@ -321,6 +458,7 @@ export async function GET(request: NextRequest) {
 - **Build Command**: `npm run build`
 - **Install Command**: `npm install --legacy-peer-deps`
 - **Framework**: Next.js (auto-detected)
+- **Test Integration**: `npm run test:ci` in CI/CD pipeline
 
 ### Performance Optimizations
 - **Static Generation**: Event pages pre-generated
