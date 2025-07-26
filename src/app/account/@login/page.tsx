@@ -1,7 +1,5 @@
-import { Metadata } from "next"
-
-import Login from "@modules/account/components/login"
+import LoginTemplate from "@modules/account/templates/login-template"
 
 export default function LoginPage() {
-  return <Login />
+  return <LoginTemplate />
 }
