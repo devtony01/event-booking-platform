@@ -4,6 +4,7 @@ import { useState } from "react"
 
 import Register from "@modules/account/components/register"
 import Login from "@modules/account/components/login"
+import SocialAuth from "@modules/account/components/social-auth"
 
 export enum LOGIN_VIEW {
   SIGN_IN = "sign-in",
@@ -28,6 +29,11 @@ const LoginTemplate = () => {
             ) : (
               <Register setCurrentView={setCurrentView} />
             )}
+            
+            {/* Social Authentication - Shared between login and register */}
+            <div className="px-8 pb-8">
+              <SocialAuth />
+            </div>
           </div>
 
         </div>

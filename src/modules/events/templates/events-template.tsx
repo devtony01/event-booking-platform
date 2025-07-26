@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { Event, EventFilters } from '@modules/events/types';
 import EventsList from '../components/events-list';
 import EventFiltersComponent from '../components/event-filters';
@@ -79,6 +81,17 @@ export default function EventsTemplate({ initialEvents }: EventsTemplateProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
+          {/* Back Button */}
+          <div className="mb-4">
+            <Link 
+              href="/" 
+              className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Home
+            </Link>
+          </div>
+          
           <Text size="xlarge" weight="plus" className="text-gray-900 mb-2">
             Discover Amazing Events
           </Text>

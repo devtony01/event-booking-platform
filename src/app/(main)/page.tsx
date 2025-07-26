@@ -26,7 +26,7 @@ export default function HomePage() {
               </Button>
               <Button className="text-white border-white hover:bg-white/10" asChild>
                 <Link href="/account">
-                  Sign Up Free
+                  Get Started
                 </Link>
               </Button>
             </div>
