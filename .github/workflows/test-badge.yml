@@ -25,22 +25,19 @@ jobs:
       with:
         node-version: '18'
         cache: 'yarn'
-        cache-dependency-path: next/yarn.lock
+        cache-dependency-path: yarn.lock
         
     - name: Install dependencies
       run: |
-        cd next
         yarn install --frozen-lockfile
         
     - name: Run tests and generate badge
       run: |
-        cd next
         yarn test:badge
         
     - name: Check for changes
       id: verify-changed-files
       run: |
-        cd next
         if [ -n "$(git status --porcelain)" ]; then
           echo "changed=true" >> $GITHUB_OUTPUT
         else
@@ -50,7 +47,6 @@ jobs:
     - name: Commit and push changes
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
-        cd next
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add README.md test-results.json public/test-results.html
@@ -63,9 +59,9 @@ jobs:
       with:
         name: test-results
         path: |
-          next/test-results.json
-          next/public/test-results.html
-          next/coverage/
+          test-results.json
+          public/test-results.html
+          coverage/
         retention-days: 30
         
     - name: Comment PR with test results
@@ -77,7 +73,7 @@ jobs:
           const path = require('path');
           
           try {
-            const resultsPath = path.join('next', 'test-results.json');
+            const resultsPath = 'test-results.json';
             const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
             
             const passRate = results.passRate;
