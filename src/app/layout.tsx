@@ -1,31 +1,32 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { SessionProviderWrapper } from '@providers/session-provider';
-import { ToastProvider } from '@providers/toast-provider';
-import '../styles/globals.css';
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "../styles/globals.css"
+import { Toaster } from "react-hot-toast"
+import { AuthProvider } from "@providers/auth-provider"
+import { getServerSession } from "next-auth"
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'Event Booking Platform',
-  description: 'Discover and book tickets for amazing events in your area',
-};
+  title: "EventHub - Book Amazing Events",
+  description: "Discover and book tickets for amazing events in your area",
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
+  const session = await getServerSession()
+  
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProviderWrapper>
-          <div className="min-h-screen bg-gray-50">
-            <main>{children}</main>
-          </div>
-          <ToastProvider />
-        </SessionProviderWrapper>
+        <AuthProvider session={session}>
+          {children}
+          <Toaster position="top-right" />
+        </AuthProvider>
       </body>
     </html>
-  );
+  )
 }

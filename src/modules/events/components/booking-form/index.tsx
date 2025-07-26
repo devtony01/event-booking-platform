@@ -42,21 +42,31 @@ const BookingForm = ({ event, disabled = false, status, className }: BookingForm
     try {
       setIsSubmitting(true)
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Handle booking submission internally
-      console.log('Booking submitted:', {
-        eventId: event._id,
-        numberOfTickets: data.numberOfTickets,
-        totalAmount: totalAmount,
+      // Create booking via API
+      const response = await fetch(`/api/bookings/${event._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          eventId: event._id,
+          numberOfTickets: data.numberOfTickets,
+          totalAmount: totalAmount,
+        }),
       })
       
-      // In a real app, this would make an API call to create the booking
+      const result = await response.json()
+      
+      if (!response.ok) {
+        toast.error(result.error || 'Failed to book tickets')
+        return
+      }
       
       toast.success(`Successfully booked ${data.numberOfTickets} ticket${data.numberOfTickets > 1 ? 's' : ''} for ${event.title}!`)
       
-      // Reset form or redirect to confirmation page
+      // Reset form
+      setValue('numberOfTickets', 1)
+      setValue('totalAmount', event.price)
       
     } catch (error) {
       toast.error('Failed to book tickets. Please try again.')

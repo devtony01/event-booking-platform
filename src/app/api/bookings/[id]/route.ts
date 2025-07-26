@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
 // Mock booking data
 const mockBookings = [
@@ -37,6 +38,62 @@ export async function GET(
     console.error('Error fetching booking:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch booking' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const resolvedParams = await params;
+  try {
+    // Check if user is authenticated
+    const session = await getServerSession();
+    if (!session?.user) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const { eventId, numberOfTickets, totalAmount } = await request.json();
+    
+    // Validate input
+    if (!eventId || !numberOfTickets || !totalAmount) {
+      return NextResponse.json(
+        { success: false, error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Create new booking
+    const newBooking = {
+      id: Date.now().toString(),
+      userId: session.user.email || 'anonymous',
+      eventId: resolvedParams.id,
+      numberOfSeats: numberOfTickets,
+      totalPrice: totalAmount,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      bookingDate: new Date(),
+      customerName: session.user.name || 'Guest',
+      customerEmail: session.user.email || '',
+    };
+
+    // Add to mock storage
+    mockBookings.push(newBooking);
+
+    return NextResponse.json({
+      success: true,
+      data: newBooking,
+      message: 'Booking created successfully',
+    });
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to create booking' },
       { status: 500 }
     );
   }

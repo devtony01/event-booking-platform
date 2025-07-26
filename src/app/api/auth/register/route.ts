@@ -1,100 +1,73 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isValidEmail, isValidPassword } from '@lib/utils';
+import bcrypt from 'bcryptjs';
 
-// Mock users storage (in a real app, this would be a database)
-const mockUsers: Array<{
-  id: string;
-  username: string;
-  email: string;
-  password: string;
-  role: string;
-  createdAt: string;
-}> = [
+// Mock users storage (in production, this would be a database)
+const mockUsers: any[] = [
   {
     id: '1',
-    username: 'John Doe',
     email: 'user@example.com',
-    password: 'password123',
+    password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/VcSAg/9qK', // password123
+    name: 'John Doe',
     role: 'user',
-    createdAt: new Date().toISOString(),
   },
   {
     id: '2',
-    username: 'Jane Smith',
     email: 'organizer@example.com',
-    password: 'password123',
+    password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/VcSAg/9qK', // password123
+    name: 'Jane Smith',
     role: 'organizer',
-    createdAt: new Date().toISOString(),
   },
 ];
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { username, email, password } = body;
+    const { name, email, password } = await request.json();
 
-    // Validate required fields
-    if (!username || !email || !password) {
+    // Validate input
+    if (!name || !email || !password) {
       return NextResponse.json(
-        { success: false, message: 'All fields are required' },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
-    if (!isValidEmail(email)) {
-      return NextResponse.json(
-        { success: false, message: 'Please enter a valid email address' },
-        { status: 400 }
-      );
-    }
-
-    // Validate password strength
-    if (!isValidPassword(password)) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          message: 'Password must be at least 8 characters with uppercase, lowercase, and number' 
-        },
+        { error: 'Name, email, and password are required' },
         { status: 400 }
       );
     }
 
     // Check if user already exists
-    const existingUser = mockUsers.find(user => user.email.toLowerCase() === email.toLowerCase());
+    const existingUser = mockUsers.find(user => user.email === email);
     if (existingUser) {
       return NextResponse.json(
-        { success: false, message: 'An account with this email already exists' },
-        { status: 409 }
+        { error: 'User with this email already exists' },
+        { status: 400 }
       );
     }
 
-    // Create new user (in a real app, hash the password first)
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create new user
     const newUser = {
-      id: (mockUsers.length + 1).toString(),
-      username: username.trim(),
-      email: email.toLowerCase().trim(),
-      password, // In production, use bcrypt.hash(password, 12)
+      id: Date.now().toString(),
+      email,
+      password: hashedPassword,
+      name,
       role: 'user',
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(),
     };
 
     // Add to mock storage
     mockUsers.push(newUser);
 
-    // Return success response (excluding password)
+    // Return success (don't include password in response)
     const { password: _, ...userWithoutPassword } = newUser;
     
     return NextResponse.json({
       success: true,
-      message: 'Account created successfully',
-      data: userWithoutPassword,
+      user: userWithoutPassword,
+      message: 'User created successfully',
     });
-
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { success: false, message: 'Internal server error' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
