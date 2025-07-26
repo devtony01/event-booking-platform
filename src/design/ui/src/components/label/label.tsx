@@ -1,7 +1,7 @@
 "use client"
 
 import * as Primitives from "@radix-ui/react-label"
-import { cva, type VariantProps } from "cva"
+import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
 import { clx } from "../../utils/clx"
@@ -28,7 +28,10 @@ const labelVariants = cva({
 
 interface LabelProps
   extends React.ComponentPropsWithoutRef<"label">,
-    VariantProps<typeof labelVariants> {}
+    VariantProps<typeof labelVariants> {
+  size?: "xsmall" | "small" | "base" | "large"
+  weight?: "regular" | "plus"
+}
 
 /**
  * This component is based on the [Radix UI Label](https://www.radix-ui.com/primitives/docs/components/label) primitive.
@@ -49,7 +52,11 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
     return (
       <Primitives.Root
         ref={ref}
-        className={clx(labelVariants({ size, weight }), className)}
+        className={clx(
+          // @ts-ignore - cva type issue
+          labelVariants({ size, weight }),
+          className
+        )}
         {...props}
       />
     )

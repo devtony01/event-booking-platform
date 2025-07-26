@@ -1,5 +1,5 @@
 import { Slot } from "@radix-ui/react-slot"
-import { VariantProps, cva } from "cva"
+import { VariantProps, cva } from "class-variance-authority"
 import * as React from "react"
 
 import { clx } from "../../utils/clx";
@@ -91,6 +91,10 @@ interface TextProps
     VariantProps<typeof textVariants> {
   asChild?: boolean
   as?: "p" | "span" | "div"
+  size?: "xsmall" | "small" | "base" | "large" | "xlarge"
+  weight?: "regular" | "plus"
+  family?: "sans" | "mono"
+  leading?: "normal" | "compact"
 }
 
 /**
@@ -136,6 +140,7 @@ const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
       <Component
         ref={ref}
         className={clx(
+          // @ts-ignore - cva type issue
           textVariants({ size, weight, family, leading }),
           className
         )}

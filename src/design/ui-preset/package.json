@@ -1,7 +1,7 @@
 {
-  "name": "ui-preset",
-  "version": "1.0.0",
-  "keywords": [],
+  "name": "@design/ui-preset",
+  "version": "0.0.0",
+  "private": true,
   "author": "",
   "license": "MIT",
   "description": "",

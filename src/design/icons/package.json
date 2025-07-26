@@ -1,7 +1,7 @@
 {
-  "name": "icons",
-  "version": "1.0.0",
-  "license": "MIT",
+  "name": "@design/icons",
+  "version": "0.0.0",
+  "private": true,
   "main": "dist/cjs/icons.js",
   "main:umd": "dist/umd/icons.js",
   "module": "dist/esm/index.js",

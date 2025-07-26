@@ -1,5 +1,5 @@
 import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "cva"
+import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
 import { clx } from "../../utils/clx"
@@ -59,6 +59,9 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean
   asChild?: boolean
+  variant?: "primary" | "secondary" | "transparent" | "danger"
+  size?: "small" | "base" | "large" | "xlarge"
+  disabled?: boolean
 }
 
 /**
@@ -121,7 +124,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Component
         ref={ref}
         {...props}
-        className={clx(buttonVariants({ variant, size }), className)}
+        className={clx(
+          // @ts-ignore - cva type issue
+          buttonVariants({ variant, size }),
+          className
+        )}
         disabled={disabled || isLoading}
       >
         {renderInner()}

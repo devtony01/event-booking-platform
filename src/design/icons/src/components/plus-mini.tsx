@@ -1,7 +1,7 @@
 import * as React from "react"
 import type { IconProps } from "../types"
 
-const Eye = React.forwardRef<SVGSVGElement, IconProps>(
+const PlusMini = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = "currentColor", ...props }, ref) => {
     return (
       <svg
@@ -17,20 +17,11 @@ const Eye = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M2.5 10s3.5-6 7.5-6 7.5 6 7.5 6-3.5 6-7.5 6-7.5-6-7.5-6Z"
-        />
-        <circle
-          cx={10}
-          cy={10}
-          r={2.5}
-          stroke={color}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
+          d="M10 6v8M6 10h8"
         />
       </svg>
     )
   }
 )
-Eye.displayName = "Eye"
-export default Eye
+PlusMini.displayName = "PlusMini"
+export default PlusMini
