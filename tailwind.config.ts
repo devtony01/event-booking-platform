@@ -3,7 +3,7 @@ const path = require("path")
 import type { Config } from "tailwindcss";
 
 export default {
-  presets: [require("ui-preset")],
+  presets: [require("./src/design/ui-preset")],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
