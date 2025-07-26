@@ -8,3 +8,5 @@ export const siteConfig = {
     github: "https://github.com/devtony01/event-booking-platform",
   },
 }
+
+export const showLogger = process.env.NODE_ENV === 'development'
