@@ -1,30 +1,30 @@
-import type { Metadata } from "next";
-import "styles/globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { SessionProviderWrapper } from '@providers/session-provider';
+import { ToastProvider } from '@providers/toast-provider';
+import '../styles/globals.css';
 
-import { siteConfig } from '@lib/config';
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.title,
-    template: `%s | ${siteConfig.title} Project`,
-  },
-  description: siteConfig.description,
-  robots: { index: true, follow: true },
-  icons: {
-    icon: '/favicon/favicon.ico',
-  },
+  title: 'Event Booking Platform',
+  description: 'Discover and book tickets for amazing events in your area',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" data-mode="light">
-      <body className="flex flex-col bg-white">
-        <main className="relative">{children}</main>
+    <html lang="en">
+      <body className={inter.className}>
+        <SessionProviderWrapper>
+          <div className="min-h-screen bg-gray-50">
+            <main>{children}</main>
+          </div>
+          <ToastProvider />
+        </SessionProviderWrapper>
       </body>
     </html>
   );
