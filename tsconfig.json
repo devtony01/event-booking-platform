@@ -27,8 +27,13 @@
       "@design/*": ["design/*"],
       "@providers/*": ["providers/*"]
     },
-    "composite": true
+    "composite": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "src/design/icons/**/*",
+    "src/design/ui/**/*",
+    "src/design/ui-preset/**/*"
+  ]
 }
