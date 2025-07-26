@@ -170,7 +170,7 @@ export default function TestDashboard() {
             <div className="flex items-center space-x-4">
               <Button
                 onClick={() => setAutoRefresh(!autoRefresh)}
-                variant={autoRefresh ? "default" : "secondary"}
+                variant={autoRefresh ? "primary" : "secondary"}
                 className="flex items-center space-x-2"
               >
                 <span>{autoRefresh ? '⏸️' : '▶️'}</span>

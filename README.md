@@ -1,6 +1,6 @@
 # 🎫 EventHub - Event Booking Platform
 
-![Test Status](https://img.shields.io/badge/tests-48%2F70%20(69%25)-yellow)-yellow)
+![Test Status](https://img.shields.io/badge/tests-48%2F70%20%2869%25%29-yellow)
 
 📊 **[View Live Test Dashboard](http://localhost:3001/test-dashboard)** | 🧪 **[View Test Results Page](http://localhost:3001/test-results.html)**
 
@@ -366,6 +366,51 @@ export async function GET(request: NextRequest) {
 
 
 ### 📊 Test Results Summary
+
+| Metric | Value |
+|--------|-------|
+| **Total Tests** | 70 |
+| **Passing** | 48 ✅ |
+| **Failing** | 22 ❌ |
+| **Pass Rate** | 69% |
+| **Last Updated** | 7/26/2025, 3:41:56 PM |
+
+### 📁 Test Suites
+
+- ❌ **utils**: undefined/NaN (0%)
+- ❌ **SocialAuth**: undefined/NaN (0%)
+- ❌ **EventCard**: undefined/NaN (0%)
+- ❌ **button.spec.tsx**: undefined/NaN (0%)
+- ❌ **text.spec.tsx**: undefined/NaN (0%)
+- ❌ **label.spec.tsx**: undefined/NaN (0%)
+- ❌ **events**: undefined/NaN (0%)
+- ❌ **events**: undefined/NaN (0%)
+- ❌ **users**: undefined/NaN (0%)
+
+### 🧪 Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run specific test file
+npm test -- EventCard.test.tsx
+```
+
+### 🔧 Test Configuration
+
+- **Framework**: Jest with React Testing Library
+- **Coverage Threshold**: 50% (branches, functions, lines, statements)
+- **Test Environment**: jsdom
+- **Mocking**: NextAuth, Next.js Router, Next Image
+
+## 📊 Test Results Summary
 
 | Metric | Value |
 |--------|-------|

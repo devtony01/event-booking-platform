@@ -65,7 +65,11 @@ class TestBadgeGenerator {
     const color = passRate >= 80 ? 'brightgreen' : passRate >= 60 ? 'yellow' : 'red';
     const label = 'tests';
     const message = `${passing}/${total} (${passRate}%)`;
-    return `https://img.shields.io/badge/${label}-${encodeURIComponent(message)}-${color}`;
+    // Properly encode the message to avoid URL issues
+    const encodedMessage = encodeURIComponent(message).replace(/[()]/g, (match) => {
+      return match === '(' ? '%28' : '%29';
+    });
+    return `https://img.shields.io/badge/${label}-${encodedMessage}-${color}`;
   }
 
   generateTestSummary(testResult) {
@@ -177,7 +181,8 @@ npm test -- EventCard.test.tsx
       if (!readme.includes('![Test Status]')) {
         readme = readme.replace(titleMatch[0], titleMatch[0] + badgeMarkdown);
       } else {
-        readme = readme.replace(/!\[Test Status\]\([^)]+\)/, `![Test Status](${badge})`);
+        // More robust regex to handle malformed badges
+        readme = readme.replace(/!\[Test Status\]\([^)]+\)[^\n]*/g, `![Test Status](${badge})`);
       }
     }
 
