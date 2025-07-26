@@ -370,208 +370,27 @@ export async function GET(request: NextRequest) {
 | Metric | Value |
 |--------|-------|
 | **Total Tests** | 129 |
+| **Test Suites** | 12 |
 | **Passing** | 129 ✅ |
 | **Failing** | 0 ❌ |
 | **Pass Rate** | 100% |
-| **Last Updated** | 7/26/2025, 5:19:44 PM |
+| **Execution Time** | 3.485s |
+| **Last Updated** | July 26, 2025, 17:57 UTC |
 
-### 📁 Test Suites
+### 📁 Test Suites Coverage
 
-- ❌ **data**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **helper**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **storage**: undefined/NaN (0%)
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **validation**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-yarn test
-
-# Run tests in watch mode
-yarn test:watch
-
-# Run tests with coverage
-yarn test:coverage
-
-# Run specific test file
-yarn test EventCard.test.tsx
-```
-
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 129 |
-| **Passing** | 129 ✅ |
-| **Failing** | 0 ❌ |
-| **Pass Rate** | 100% |
-| **Last Updated** | 7/26/2025, 5:16:54 PM |
-
-### 📁 Test Suites
-
-- ❌ **data**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **validation**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **storage**: undefined/NaN (0%)
-- ❌ **helper**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm test -- EventCard.test.tsx
-```
-
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 70 |
-| **Passing** | 48 ✅ |
-| **Failing** | 22 ❌ |
-| **Pass Rate** | 69% |
-| **Last Updated** | 7/26/2025, 3:41:56 PM |
-
-### 📁 Test Suites
-
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm test -- EventCard.test.tsx
-```
-
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 70 |
-| **Passing** | 48 ✅ |
-| **Failing** | 22 ❌ |
-| **Pass Rate** | 69% |
-| **Last Updated** | 7/26/2025, 3:33:29 PM |
-
-### 📁 Test Suites
-
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm test -- EventCard.test.tsx
-```
-
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 70 |
-| **Passing** | 48 ✅ |
-| **Failing** | 22 ❌ |
-| **Pass Rate** | 69% |
-| **Last Updated** | 7/26/2025, 3:29:13 PM |
-
-### 📁 Test Suites
-
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
+- ✅ **data**: Event and user data store functions
+- ✅ **EventCard**: Component rendering and interactions
+- ✅ **button.spec.tsx**: UI component variants and states
+- ✅ **SocialAuth**: Authentication provider integration
+- ✅ **helper**: Utility and helper functions
+- ✅ **label.spec.tsx**: Form label components
+- ✅ **text.spec.tsx**: Typography components
+- ✅ **storage**: Local storage utilities
+- ✅ **utils**: Date formatting, currency, validation
+- ✅ **validation**: Form validation logic
+- ✅ **events**: Event CRUD operations and filtering
+- ✅ **users**: User management and authentication
 
 ### 🧪 Running Tests
 
