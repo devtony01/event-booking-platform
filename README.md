@@ -4,8 +4,10 @@ A modern event booking platform built with Next.js 15, TypeScript, and Tailwind 
 
 ## 🌐 Live Demo
 
-**🔗 Live URL**: https://next-mo09lu6d7-chibueze-ogbujis-projects.vercel.app  
+**🔗 Live URL**: https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app  
 **📂 GitHub Repository**: https://github.com/devtony01/event-booking-platform
+
+> **Note**: Production deployment has Vercel authentication protection enabled. For full API testing, use local development environment.
 
 ## ✅ Requirements Fulfilled
 
@@ -480,6 +482,91 @@ it('should return all events when no filters provided', async () => {
 - **Component Architecture**: Reusable and composable
 - **Error Handling**: Comprehensive error boundaries
 - **Form Validation**: Client-side and server-side validation
+
+## 🔐 Google OAuth Testing Guide
+
+### 📝 Manual Testing Steps
+
+#### **1. Access the Application**
+```bash
+# Production URL (with Vercel auth protection)
+https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app
+
+# Local development (recommended for full testing)
+npm run dev
+# Then visit: http://localhost:3001
+```
+
+#### **2. Test Google OAuth Flow**
+1. **Navigate to Authentication**:
+   - Click "Get Started" on homepage
+   - Or go to `/account` directly
+
+2. **Initiate Google OAuth**:
+   - Look for "Continue with Google" button
+   - Click to start OAuth flow
+
+3. **Complete Authentication**:
+   - Redirects to Google OAuth consent screen
+   - Grant permissions to the application
+   - Should redirect back to `/events` page
+
+4. **Verify Session**:
+   - User should be logged in
+   - Session data available in browser
+   - Can access protected features
+
+### 🔧 OAuth Configuration
+
+#### **Google Cloud Console Settings**:
+- **Client ID**: `206495327972-fs8tvbh83c454lr99kj5b8mk9c5jaj6k.apps.googleusercontent.com`
+- **Authorized Origins**: `https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app`
+- **Redirect URIs**: `https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app/api/auth/callback/google`
+
+### 🧪 API Testing with cURL
+
+#### **Comprehensive Test Script**
+```bash
+# Make script executable
+chmod +x test-api.sh
+
+# Test local development
+./test-api.sh http://localhost:3001
+```
+
+#### **Individual API Tests**
+```bash
+# Test events endpoint
+curl -s http://localhost:3001/api/events | jq
+
+# Test user registration
+curl -X POST http://localhost:3001/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test User","email":"test@example.com","password":"password123"}' | jq
+
+# Test OAuth providers
+curl -s http://localhost:3001/api/auth/providers | jq
+```
+
+### 📊 Test Results Summary
+
+#### **✅ Passing Tests**:
+- **Events API**: GET, POST, filtering, pagination
+- **User Registration**: Validation, duplicate prevention
+- **Authentication**: OAuth providers, CSRF tokens
+- **Error Handling**: 404, 400, validation errors
+- **Google OAuth**: Complete authentication flow
+
+#### **📝 Testing Checklist**
+
+- [ ] **Homepage loads correctly**
+- [ ] **"Get Started" button navigates to auth**
+- [ ] **Google OAuth button appears**
+- [ ] **OAuth redirect to Google works**
+- [ ] **User can complete Google authentication**
+- [ ] **Successful redirect to events page**
+- [ ] **User session is created and persists**
+- [ ] **API endpoints return correct data**
 
 ## 🤝 Contributing
 
