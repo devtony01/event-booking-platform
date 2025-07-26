@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Calendar, Users, Star, ArrowRight } from 'lucide-react';
-import { Button } from '@design/ui/src/components/button';
-import { Text } from '@design/ui/src/components/text';
+import { Button, Text } from '@design/ui';
 
 export default function HomePage() {
   return (

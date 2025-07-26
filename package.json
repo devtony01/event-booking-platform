@@ -2,8 +2,14 @@
   "name": "dev-challenge",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "src/design/ui",
+    "src/design/ui-preset",
+    "src/design/icons"
+  ],
   "scripts": {
     "dev": "next dev -p 3001",
+    "prebuild": "yarn workspace @design/ui-preset build && yarn workspace @design/ui build && yarn workspace @design/icons build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -14,9 +20,15 @@
     "test:badge": "node scripts/generate-test-badge.js",
     "test:update-readme": "yarn test:badge",
     "test:watch-and-update": "node scripts/watch-tests.js watch",
-    "test:dashboard": "echo 'Test dashboard available at http://localhost:3001/test-dashboard'"
+    "test:dashboard": "echo 'Test dashboard available at http://localhost:3001/test-dashboard'",
+    "build:design": "yarn workspace @design/ui-preset build && yarn workspace @design/ui build && yarn workspace @design/icons build",
+    "clean:design": "yarn workspace @design/ui clean && yarn workspace @design/icons clean",
+    "dev:design": "yarn workspace @design/ui build:watch"
   },
   "dependencies": {
+    "@design/icons": "*",
+    "@design/ui": "*",
+    "@design/ui-preset": "*",
     "@hookform/resolvers": "^5.2.0",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
@@ -41,6 +53,7 @@
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.0",
+    "@types/minimatch": "^6.0.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

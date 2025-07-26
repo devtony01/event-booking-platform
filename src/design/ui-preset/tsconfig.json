@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "composite": false,
@@ -13,7 +16,8 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "checkJs": false
+    "checkJs": false,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]

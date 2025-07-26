@@ -1,5 +1,5 @@
-import { ArrowUpRightMini } from "@design/icons/src"
-import { Text } from "@design/ui/src"
+import { ArrowUpRightMini } from "@design/icons"
+import { Text } from "@design/ui"
 import { Metadata } from "next"
 import Link from "next/link"
 
