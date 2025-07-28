@@ -361,7 +361,6 @@ export async function GET(request: NextRequest) {
 ## 🧪 Testing
 
 ✅ **Test Status**: 129/129 tests passing (100%)
-
 ```bash
 # Run all tests
 npm test
