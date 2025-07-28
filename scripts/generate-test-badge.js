@@ -210,7 +210,7 @@ ${details}`;
     this.log('📝 README.md updated with test results', 'green');
     
     // Also save test results to a JSON file for CI/CD
-    const resultsPath = path.join(process.cwd(), 'test-results.json');
+    const resultsPath = path.join(process.cwd(), 'scripts', 'test-results.json');
     fs.writeFileSync(resultsPath, JSON.stringify(this.results, null, 2));
     this.log('💾 Test results saved to test-results.json', 'blue');
   }

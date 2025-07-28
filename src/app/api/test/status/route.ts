@@ -4,7 +4,7 @@ import path from 'path'
 
 export async function GET() {
   try {
-    const resultsPath = path.join(process.cwd(), 'test-results.json')
+    const resultsPath = path.join(process.cwd(), 'scripts', 'test-results.json')
     
     if (fs.existsSync(resultsPath)) {
       const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'))

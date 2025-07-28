@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const testResults = await runTests()
     
     // Save results to JSON file
-    const resultsPath = path.join(process.cwd(), 'test-results.json')
+    const resultsPath = path.join(process.cwd(), 'scripts', 'test-results.json')
     fs.writeFileSync(resultsPath, JSON.stringify(testResults, null, 2))
     
     return NextResponse.json({
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   try {
     // Return cached test results
-    const resultsPath = path.join(process.cwd(), 'test-results.json')
+    const resultsPath = path.join(process.cwd(), 'scripts', 'test-results.json')
     
     if (fs.existsSync(resultsPath)) {
       const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'))

@@ -39,7 +39,7 @@ export default function TestDashboard() {
   // Load test results from JSON file
   const loadTestResults = async () => {
     try {
-      const response = await fetch('/test-results.json')
+      const response = await fetch('/scripts/test-results.json')
       if (response.ok) {
         const data = await response.json()
         setTestResults(data)

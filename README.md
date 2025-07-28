@@ -2,8 +2,6 @@
 
 ![Test Status](https://img.shields.io/badge/tests-129%2F129%20%28100%25%29-brightgreen)
 
-📊 **[View Live Test Dashboard](http://localhost:3001/test-dashboard)** | 🧪 **[View Test Results Page](http://localhost:3001/test-results.html)**
-
 
 A modern event booking platform built with Next.js 15, TypeScript, and Tailwind CSS where users can browse events, view details, and book tickets with authentication.
 
@@ -364,132 +362,6 @@ export async function GET(request: NextRequest) {
 
 ✅ **Test Status**: 129/129 tests passing (100%)
 
-
-### 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 129 |
-| **Passing** | 129 ✅ |
-| **Failing** | 0 ❌ |
-| **Pass Rate** | 100% |
-| **Last Updated** | 7/26/2025, 6:42:50 PM |
-
-### 📁 Test Suites
-
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **storage**: undefined/NaN (0%)
-- ❌ **data**: undefined/NaN (0%)
-- ❌ **validation**: undefined/NaN (0%)
-- ❌ **helper**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-yarn test
-
-# Run tests in watch mode
-yarn test:watch
-
-# Run tests with coverage
-yarn test:coverage
-
-# Run specific test file
-yarn test EventCard.test.tsx
-```
-
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 129 |
-| **Passing** | 129 ✅ |
-| **Failing** | 0 ❌ |
-| **Pass Rate** | 100% |
-| **Last Updated** | 7/26/2025, 6:37:19 PM |
-
-### 📁 Test Suites
-
-- ❌ **utils**: undefined/NaN (0%)
-- ❌ **events**: undefined/NaN (0%)
-- ❌ **storage**: undefined/NaN (0%)
-- ❌ **data**: undefined/NaN (0%)
-- ❌ **validation**: undefined/NaN (0%)
-- ❌ **helper**: undefined/NaN (0%)
-- ❌ **EventCard**: undefined/NaN (0%)
-- ❌ **text.spec.tsx**: undefined/NaN (0%)
-- ❌ **SocialAuth**: undefined/NaN (0%)
-- ❌ **button.spec.tsx**: undefined/NaN (0%)
-- ❌ **label.spec.tsx**: undefined/NaN (0%)
-- ❌ **users**: undefined/NaN (0%)
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-yarn test
-
-# Run tests in watch mode
-yarn test:watch
-
-# Run tests with coverage
-yarn test:coverage
-
-# Run specific test file
-yarn test EventCard.test.tsx
-```
-
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## 📊 Test Results Summary
-
-| Metric | Value |
-|--------|-------|
-| **Total Tests** | 129 |
-| **Test Suites** | 12 |
-| **Passing** | 129 ✅ |
-| **Failing** | 0 ❌ |
-| **Pass Rate** | 100% |
-| **Execution Time** | 3.485s |
-| **Last Updated** | July 26, 2025, 17:57 UTC |
-
-### 📁 Test Suites Coverage
-
-- ✅ **data**: Event and user data store functions
-- ✅ **EventCard**: Component rendering and interactions
-- ✅ **button.spec.tsx**: UI component variants and states
-- ✅ **SocialAuth**: Authentication provider integration
-- ✅ **helper**: Utility and helper functions
-- ✅ **label.spec.tsx**: Form label components
-- ✅ **text.spec.tsx**: Typography components
-- ✅ **storage**: Local storage utilities
-- ✅ **utils**: Date formatting, currency, validation
-- ✅ **validation**: Form validation logic
-- ✅ **events**: Event CRUD operations and filtering
-- ✅ **users**: User management and authentication
-
-### 🧪 Running Tests
-
 ```bash
 # Run all tests
 npm test
@@ -499,113 +371,10 @@ npm run test:watch
 
 # Run tests with coverage
 npm run test:coverage
-
-# Run specific test file
-npm test -- EventCard.test.tsx
 ```
 
-### 🔧 Test Configuration
-
-- **Framework**: Jest with React Testing Library
-- **Coverage Threshold**: 50% (branches, functions, lines, statements)
-- **Test Environment**: jsdom
-- **Mocking**: NextAuth, Next.js Router, Next Image
-
-## Test Suite Overview
-Comprehensive unit tests covering core functionality:
-
-#### **Test Coverage Areas**
-- **Data Layer**: Event and user data store functions
-- **Utility Functions**: Date formatting, currency, event status
-- **React Components**: Event cards, social authentication
-- **API Routes**: Event CRUD operations, validation
-- **Authentication**: User creation, password validation
-
-#### **Testing Technologies**
-- **Jest**: Test runner and assertion library
-- **React Testing Library**: Component testing utilities
-- **Jest DOM**: Custom Jest matchers for DOM testing
-- **User Event**: Simulating user interactions
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode (development)
-npm run test:watch
-
-# Run tests with coverage report
-npm run test:coverage
-
-# Run tests for CI/CD
-npm run test:ci
-```
-
-### Test Structure
-
-```
-src/__tests__/
-├── components/           # Component tests
-│   ├── EventCard.test.tsx
-│   └── SocialAuth.test.tsx
-├── lib/                  # Utility and data tests
-│   ├── events.test.ts
-│   ├── users.test.ts
-│   └── utils.test.ts
-└── api/                  # API route tests
-    └── events.test.ts
-```
-
-### Test Examples
-
-#### **Component Testing**
-```typescript
-// Testing event card rendering and interactions
-it('renders event information correctly', () => {
-  render(<EventCard event={mockEvent} />)
-  
-  expect(screen.getByText('Test Event')).toBeInTheDocument()
-  expect(screen.getByText('$50.00')).toBeInTheDocument()
-})
-```
-
-#### **Data Store Testing**
-```typescript
-// Testing event filtering functionality
-it('should return events filtered by category', () => {
-  const events = getEventsByCategory('Technology')
-  
-  events.forEach(event => {
-    expect(event.category.toLowerCase()).toBe('technology')
-  })
-})
-```
-
-#### **API Testing**
-```typescript
-// Testing API route responses
-it('should return all events when no filters provided', async () => {
-  const response = await GET(request)
-  const data = await response.json()
-
-  expect(response.status).toBe(200)
-  expect(data.success).toBe(true)
-})
-```
-
-### Coverage Goals
-- **Branches**: 70%+
-- **Functions**: 70%+
-- **Lines**: 70%+
-- **Statements**: 70%+
-
-### Mocking Strategy
-- **Next.js Router**: Mocked for navigation testing
-- **NextAuth**: Mocked for authentication testing
-- **Next Image**: Mocked for component testing
-- **API Calls**: Mocked for isolated unit testing
+**Framework**: Jest with React Testing Library  
+**Coverage**: Components, utilities, API routes, and authentication
 
 ## 🚀 Deployment
 
@@ -637,90 +406,18 @@ it('should return all events when no filters provided', async () => {
 - **Error Handling**: Comprehensive error boundaries
 - **Form Validation**: Client-side and server-side validation
 
-## 🔐 Google OAuth Testing Guide
+## 🔐 API Testing
 
-### 📝 Manual Testing Steps
-
-#### **1. Access the Application**
 ```bash
-# Production URL (with Vercel auth protection)
-https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app
+# Test API endpoints
+./scripts/test-api.sh http://localhost:3001
 
-# Local development (recommended for full testing)
-npm run dev
-# Then visit: http://localhost:3001
-```
-
-#### **2. Test Google OAuth Flow**
-1. **Navigate to Authentication**:
-   - Click "Get Started" on homepage
-   - Or go to `/account` directly
-
-2. **Initiate Google OAuth**:
-   - Look for "Continue with Google" button
-   - Click to start OAuth flow
-
-3. **Complete Authentication**:
-   - Redirects to Google OAuth consent screen
-   - Grant permissions to the application
-   - Should redirect back to `/events` page
-
-4. **Verify Session**:
-   - User should be logged in
-   - Session data available in browser
-   - Can access protected features
-
-### 🔧 OAuth Configuration
-
-#### **Google Cloud Console Settings**:
-- **Client ID**: `206495327972-fs8tvbh83c454lr99kj5b8mk9c5jaj6k.apps.googleusercontent.com`
-- **Authorized Origins**: `https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app`
-- **Redirect URIs**: `https://next-po77wy2wk-chibueze-ogbujis-projects.vercel.app/api/auth/callback/google`
-
-### 🧪 API Testing with cURL
-
-#### **Comprehensive Test Script**
-```bash
-# Make script executable
-chmod +x test-api.sh
-
-# Test local development
-./test-api.sh http://localhost:3001
-```
-
-#### **Individual API Tests**
-```bash
 # Test events endpoint
 curl -s http://localhost:3001/api/events | jq
-
-# Test user registration
-curl -X POST http://localhost:3001/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test User","email":"test@example.com","password":"password123"}' | jq
 
 # Test OAuth providers
 curl -s http://localhost:3001/api/auth/providers | jq
 ```
-
-### 📊 Test Results Summary
-
-#### **✅ Passing Tests**:
-- **Events API**: GET, POST, filtering, pagination
-- **User Registration**: Validation, duplicate prevention
-- **Authentication**: OAuth providers, CSRF tokens
-- **Error Handling**: 404, 400, validation errors
-- **Google OAuth**: Complete authentication flow
-
-#### **📝 Testing Checklist**
-
-- [ ] **Homepage loads correctly**
-- [ ] **"Get Started" button navigates to auth**
-- [ ] **Google OAuth button appears**
-- [ ] **OAuth redirect to Google works**
-- [ ] **User can complete Google authentication**
-- [ ] **Successful redirect to events page**
-- [ ] **User session is created and persists**
-- [ ] **API endpoints return correct data**
 
 ## 🤝 Contributing
 
