@@ -1,6 +1,6 @@
 # 🎫 EventHub - Event Booking Platform
 
-![Test Status](https://img.shields.io/badge/tests-129%2F129%20%28100%25%29-brightgreen)
+![Test Status](https://img.shields.io/badge/tests-error-red)
 
 
 A modern event booking platform built with Next.js 15, TypeScript, and Tailwind CSS where users can browse events, view details, and book tickets with authentication.
@@ -360,22 +360,9 @@ export async function GET(request: NextRequest) {
 
 ## 🧪 Testing
 
-✅ **Test Status**: 129/129 tests passing (100%)
-```bash
-# Run all tests
-npm test
+❌ **Test Status**: Error running tests
 
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-```
-
-**Framework**: Jest with React Testing Library  
-**Coverage**: Components, utilities, API routes, and authentication
-
-## 🚀 Deployment
+Could not execute test suite## 🚀 Deployment
 
 ### Vercel Configuration
 - **Automatic Deployments**: Connected to GitHub
