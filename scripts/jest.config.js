@@ -1,20 +1,25 @@
+const path = require('path')
 const nextJest = require('next/jest')
+
+// Get the project root directory (parent of scripts)
+const projectRoot = path.resolve(__dirname, '..')
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files
-  dir: './',
+  dir: projectRoot,
 })
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/scripts/jest.setup.js'],
+  rootDir: projectRoot,
+  setupFilesAfterEnv: [path.join(projectRoot, 'scripts', 'jest.setup.js')],
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: [path.join(projectRoot, '.next/'), path.join(projectRoot, 'node_modules/')],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '^@lib/(.*)$': '<rootDir>/src/lib/$1',
-    '^@modules/(.*)$': '<rootDir>/src/modules/$1',
-    '^@design/(.*)$': '<rootDir>/src/design/$1',
+    '^@/(.*)$': path.join(projectRoot, 'src/$1'),
+    '^@lib/(.*)$': path.join(projectRoot, 'src/lib/$1'),
+    '^@modules/(.*)$': path.join(projectRoot, 'src/modules/$1'),
+    '^@design/(.*)$': path.join(projectRoot, 'src/design/$1'),
   },
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',

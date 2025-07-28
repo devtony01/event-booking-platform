@@ -361,19 +361,55 @@ export async function GET(request: NextRequest) {
 ## 🧪 Testing
 
 ✅ **Test Status**: 129/129 tests passing (100%)
+
+
+### 📊 Test Results Summary
+
+| Metric | Value |
+|--------|-------|
+| **Total Tests** | 129 |
+| **Passing** | 129 ✅ |
+| **Failing** | 0 ❌ |
+| **Pass Rate** | 100% |
+| **Last Updated** | 7/28/2025, 12:12:55 PM |
+
+### 📁 Test Suites
+
+- ❌ **events**: undefined/NaN (0%)
+- ❌ **utils**: undefined/NaN (0%)
+- ❌ **storage**: undefined/NaN (0%)
+- ❌ **data**: undefined/NaN (0%)
+- ❌ **validation**: undefined/NaN (0%)
+- ❌ **helper**: undefined/NaN (0%)
+- ❌ **SocialAuth**: undefined/NaN (0%)
+- ❌ **EventCard**: undefined/NaN (0%)
+- ❌ **text.spec.tsx**: undefined/NaN (0%)
+- ❌ **users**: undefined/NaN (0%)
+- ❌ **button.spec.tsx**: undefined/NaN (0%)
+- ❌ **label.spec.tsx**: undefined/NaN (0%)
+
+### 🧪 Running Tests
+
 ```bash
 # Run all tests
-npm test
+yarn test
 
 # Run tests in watch mode
-npm run test:watch
+yarn test:watch
 
 # Run tests with coverage
-npm run test:coverage
+yarn test:coverage
+
+# Run specific test file
+yarn test EventCard.test.tsx
 ```
 
-**Framework**: Jest with React Testing Library  
-**Coverage**: Components, utilities, API routes, and authentication
+### 🔧 Test Configuration
+
+- **Framework**: Jest with React Testing Library
+- **Coverage Threshold**: 50% (branches, functions, lines, statements)
+- **Test Environment**: jsdom
+- **Mocking**: NextAuth, Next.js Router, Next Image
 
 ## 🚀 Deployment
 
