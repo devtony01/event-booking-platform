@@ -371,6 +371,54 @@ export async function GET(request: NextRequest) {
 | **Passing** | 129 ✅ |
 | **Failing** | 0 ❌ |
 | **Pass Rate** | 100% |
+| **Last Updated** | 9/2/2025, 9:23:34 AM |
+
+### 📁 Test Suites
+
+- ❌ **utils**: undefined/NaN (0%)
+- ❌ **events**: undefined/NaN (0%)
+- ❌ **storage**: undefined/NaN (0%)
+- ❌ **data**: undefined/NaN (0%)
+- ❌ **validation**: undefined/NaN (0%)
+- ❌ **helper**: undefined/NaN (0%)
+- ❌ **EventCard**: undefined/NaN (0%)
+- ❌ **text.spec.tsx**: undefined/NaN (0%)
+- ❌ **SocialAuth**: undefined/NaN (0%)
+- ❌ **button.spec.tsx**: undefined/NaN (0%)
+- ❌ **label.spec.tsx**: undefined/NaN (0%)
+- ❌ **users**: undefined/NaN (0%)
+
+### 🧪 Running Tests
+
+```bash
+# Run all tests
+yarn test
+
+# Run tests in watch mode
+yarn test:watch
+
+# Run tests with coverage
+yarn test:coverage
+
+# Run specific test file
+yarn test EventCard.test.tsx
+```
+
+### 🔧 Test Configuration
+
+- **Framework**: Jest with React Testing Library
+- **Coverage Threshold**: 50% (branches, functions, lines, statements)
+- **Test Environment**: jsdom
+- **Mocking**: NextAuth, Next.js Router, Next Image
+
+## 📊 Test Results Summary
+
+| Metric | Value |
+|--------|-------|
+| **Total Tests** | 129 |
+| **Passing** | 129 ✅ |
+| **Failing** | 0 ❌ |
+| **Pass Rate** | 100% |
 | **Last Updated** | 9/1/2025, 9:25:47 AM |
 
 ### 📁 Test Suites
